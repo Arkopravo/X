@@ -6,7 +6,7 @@ import {HiHome, HiDotsHorizontal} from "react-icons/hi"
 const Sidebar = () => {
   return (
     <div className='flex flex-col p-3 justify-between h-screen'>
-
+  
       <div className='flex flex-col gap-4'>
 
         <Link href="/">
