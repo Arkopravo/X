@@ -11,7 +11,7 @@ const News = () => {
     fetch("https://saurav.tech/NewsAPI/top-headlines/category/technology/in.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setNews(data.articles);
       });
 

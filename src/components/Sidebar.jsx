@@ -1,9 +1,16 @@
+"use client"
+
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 import {FaXTwitter} from "react-icons/fa6"
 import {HiHome, HiDotsHorizontal} from "react-icons/hi"
 
+
 const Sidebar = () => {
+
+  const {data : session} = useSession();
+
   return (
     <div className='flex flex-col p-3 justify-between h-screen'>
   
@@ -21,12 +28,22 @@ const Sidebar = () => {
           <span className='font-bold hidden xl:inline'>Home</span>
         </Link>
 
-        <button
-          className='bg-blue-400 text-white rounded-full  hover:brightness-95 transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline font-semibold'
-        >
-          Sign In
-        </button>
 
+        {session ? (
+          <button
+            className='bg-blue-400 text-white rounded-full  hover:brightness-95 transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline font-semibold'
+            onClick={() => signOut()}
+          >
+            Sign Out
+          </button>
+        ) : (
+          <button
+            className='bg-blue-400 text-white rounded-full  hover:brightness-95 transition-all duration-200 w-48 h-9 shadow-md hidden xl:inline font-semibold'
+            onClick={() => signIn()}
+          >
+            Sign In
+          </button>
+        )}
       </div>
     </div>
   )
