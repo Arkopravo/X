@@ -14,8 +14,6 @@ const News = () => {
         // console.log(data);
         setNews(data.articles);
       });
-
-
   }, []);
 
   return (
@@ -37,7 +35,7 @@ const News = () => {
       <button 
         onClick={() => setArticleNum(articleNum+3)}
         className="text-blue-300 pl-4 pb-3 hover:text-blue-400 text-sm"
-        >
+      >
         Show more...
       </button>
     </div>
