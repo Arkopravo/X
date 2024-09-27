@@ -7,7 +7,7 @@ import { app } from "@/firebase";
 import { useEffect, useState } from "react";
 
 
-export default function Icons({id}) {
+export default function Icons({id, uid}) {
 
     const {data: session} = useSession();
     const db = getFirestore(app);
@@ -39,6 +39,21 @@ export default function Icons({id}) {
         setIsLiked(likes.findIndex ((like) => like.id === session?.user?.uid) !== -1)
     }, [likes]);
 
+    const deletePost = async () => {
+        if(window.confirm("Are you sure you want to delete the post?")) {
+            if(session.user.uid === uid) {
+                deleteDoc(doc(db, 'posts', id)).then(() => {
+                    console.log('Document successfully deleted!');
+                    window.location.reload();
+                }).catch((error) => {
+                    console.error("Error removing the post -> ", error);
+                });
+            } else {
+                alert("You are not authorized to delete the post")
+            }
+        }
+    }
+
 
   return (
     <div className="flex justify-start gap-5 p-2 text-gray-500">
@@ -61,9 +76,16 @@ export default function Icons({id}) {
         </div>
         
 
-        <HiOutlineTrash
-            className='h-8 w-8 cursor-pointer rounded-full  transition duration-500 ease-in-out p-2 hover:text-red-500 hover:bg-red-100' 
-        />
+
+        {session?.user?.uid === uid && (
+            <HiOutlineTrash
+                className='h-8 w-8 cursor-pointer rounded-full  transition duration-500 ease-in-out p-2 hover:text-red-500 hover:bg-red-100' 
+                onClick={deletePost}
+            />
+        )}
+
+
+        
     </div>
   )
 }

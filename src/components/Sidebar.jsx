@@ -53,7 +53,7 @@ const Sidebar = () => {
 
         {session && (
           <div className='text-gray-700 text-sm flex items-center cursor-pointer gap-3 p-3 hover:bg-gray-100 rounded-full transition-all duration-200'>
-            <img src={session.user.image} alt='user-img' className='rounded-full h-10 w-10 xl:mr-2' />
+            <img src={session?.user?.image} alt='user-img' className='rounded-full h-10 w-10 xl:mr-2' />
             <div className='hidden xl:inline'>
               <h4 className='font-bold'>{session.user.name}</h4>
               <p className='text-gray-500'>@{session.user.username}</p>
